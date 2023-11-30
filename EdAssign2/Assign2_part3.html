@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage Example</title>
+</head>
+<body>
+    <h1>Local Storage Example</h1>
+    
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" placeholder="Enter your first name"><br><br>
+    
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" placeholder="Enter your last name"><br><br>
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="text" id="dob" placeholder="Enter your date of birth (YYYY-MM-DD)"><br><br>
+    
+    <button onclick="storeData()">Save Data</button>
+    <button onclick="retrieveData()">Retrieve Data</button>
+    
+    <h2>Stored Data</h2>
+    <p id="displayData"></p>
+
+    <script>
+        function storeData() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const dob = document.getElementById('dob').value;
+            
+            const userData = {
+                firstName: firstName,
+                lastName: lastName,
+                dob: dob
+            };
+            
+            localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
+        function retrieveData() {
+            const storedData = localStorage.getItem('userData');
+            
+            if (storedData) {
+                const userData = JSON.parse(storedData);
+                const displayDataElement = document.getElementById('displayData');
+                displayDataElement.textContent = `First Name: ${userData.firstName}, Last Name: ${userData.lastName}, Date of Birth: ${userData.dob}`;
+            } else {
+                alert('No data found in local storage.');
+            }
+        }
+    </script>
+</body>
+</html>
